@@ -33,7 +33,8 @@
  */
 class Func {
     public:
-        virtual double function(double x) const;
+        virtual double function(double x) const = 0;
+        virtual double derivative(double x) const = 0;
 };
 
 
@@ -58,7 +59,7 @@ class ex_x2 : Func {
 class Minimiser {
     public:
 
-        Minimiser(const Func & f, const double startX) : _f(f), _startX(startX) {
+        Minimiser(Func & f, const double startX) : _f(f), _startX(startX) {
             // PROCEDURE 
 
             /** 
@@ -83,7 +84,7 @@ class Minimiser {
         
     private:
     
-        Func _f;
+        Func & _f;
         double _startX;
         double _minimum;
         double _minimumX;
